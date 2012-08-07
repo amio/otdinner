@@ -1,0 +1,19 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+body { font: 14px/1.8em "Microsoft Yahei", "Open Sans" STHei, sans-serif }
+
+.input-area { width: 360px; margin: 0 auto; padding-top: 94px; height: 115px }
+#signup { float: right; width: 100px; line-height: 30px }
+#name-input { font-size: 16px; width: 230px; height: 30px; padding-left: 10px }
+
+.msg-area { position: relative; height: 0; padding: 0 120px; overflow: visible; z-index: 9 }
+#msg .alert { display: none }
+
+.info { text-align: left; color: #AAA; height: 35px }
+#listCount, #onlineCount { font-size: 30px; display: inline-block; width: 30px; font-family: Georgia, serif; vertical-align: baseline; }
+
+.list-area { border-top: 1px solid #DDD; padding-top: 10px }
+.list { margin: 0 -10px }
+.person { display: inline-block; width: 139px; margin: 10px; box-shadow: 0 0 2px #999 }
+.alert-default button { display: none }
+.p-name, .p-ps { margin: 5px 10px; overflow: hidden; text-overflow: ellipsis; height: 27px; white-space: nowrap; }
+.hero-unit .p-ps { color: #AAA; font-size: 12px; line-height: 16px; overflow: hidden; text-overflow: ellipsis; height: 50px }
