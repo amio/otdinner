@@ -84,6 +84,15 @@ var server = http.createServer(app).listen(app.get('port'), function () {
  * Socket.IO
  */
 var io = require('socket.io').listen(server);
+
+// assuming io is the Socket.IO server object
+// for Heroku [https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku]
+io.configure(function () {
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
+});
+
+
 io.sockets.on('connection', function (socket) {
 	onlineCount++;
 	io.sockets.emit('user connected', onlineCount);
@@ -123,14 +132,34 @@ io.sockets.on('connection', function (socket) {
 	});
 });
 
-var checkDeadline = setInterval(function(){
+var checkEnable = function(){
 	var eh = 17, em = 30; // deadline at 5:30 PM
 
 	var h = (new Date).getHours(),
 		m = (new Date).getMinutes();
-	if(h == eh && m > em || h > eh){
-		io.sockets.emit('deadline');
-		allowReg = false;
-		clearInterval(checkDeadline);
-	}
-},900);
+	return (h < eh || h == eh && m < em);
+};
+
+var waitClose = function(){
+	var intv = setInterval(function(){
+		if(!checkEnable()){
+			io.sockets.emit('reg-close');
+			allowReg = false;
+			clearInterval(intv);
+			waitOpen();
+		}
+	},900);
+};
+
+var waitOpen = function(){
+	var intv = setInterval(function(){
+		if(checkEnable()){
+			io.sockets.emit('reg-open');
+			allowReg = true;
+			clearInterval(intv);
+			waitStop();
+		}
+	},900);
+};
+
+waitClose();

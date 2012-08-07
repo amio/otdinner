@@ -45,18 +45,20 @@ $(function(){
 			Events['appInit'].fire(initStatus);
 		});
 
+		// msg for order add or remove
 		socket.on('add-person',function(name){
 			Events['addPerson'].fire(name);
 		});
-
 		socket.on('remove-person',function(name){
 			Events['removePerson'].fire(name);
 		});
 
+		// msg for error
 		socket.on('error',function(errObj){
 			Events['error'].fire(errObj);
 		});
 
+		// msg on user count
 		socket.on('user connected',function(num){
 			View.updateOnlineCount(num);
 		});
@@ -64,7 +66,12 @@ $(function(){
 			View.updateOnlineCount(num);
 		});
 
-		socket.on('test',function(data){ console.log(data) });
+		socket.on('reg-close',function(){
+			View.disableReg();
+		});
+		socket.on('reg-open',function(){
+			View.enableReg();
+		});
 
 		return {
 			socket: socket,
