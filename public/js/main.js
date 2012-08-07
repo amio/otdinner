@@ -70,17 +70,14 @@ $(function(){
 			View.disableReg();
 		});
 		socket.on('reg-open',function(){
+			cloud = {};
+			View.clearCloud();
 			View.enableReg();
 		});
 
 		return {
 			socket: socket,
 			allowReg: true,
-			/**
-			 * init list from server
-			 */
-			init: function(initStatus){
-			},
 
 			/**
 			 * Add a person to Module(local data).
@@ -143,6 +140,8 @@ $(function(){
 			$signupBtn = $('#signup'),
 			$cloudDiv = $('#list'),
 			$msgArea = $('#msg'),
+			$listCount = $('#listCount'),
+			$onlineCount = $('#onlineCount'),
 			cloudTemplate = '<div class="person alert {$type}" data-name="{$name}">\
 								<button class="close">&times;</button>\
 								<p class="p-name">{$name}</p>\
@@ -245,11 +244,15 @@ $(function(){
 			},
 
 			updateCount: function(){
-				$('#listCount').html(Module.getCount());
+				$listCount.html(Module.getCount());
 			},
 
 			updateOnlineCount: function(num){
-				$('#onlineCount').html(num);
+				$onlineCount.html(num);
+			},
+
+			clearCloud: function(){
+				$cloudDiv.html('');
 			}
 		}
 	})();

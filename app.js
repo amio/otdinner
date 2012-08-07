@@ -143,8 +143,10 @@ var checkEnable = function(){
 var waitClose = function(){
 	var intv = setInterval(function(){
 		if(!checkEnable()){
-			io.sockets.emit('reg-close');
+			// set status and broadcast
 			allowReg = false;
+			io.sockets.emit('reg-close');
+
 			clearInterval(intv);
 			waitOpen();
 		}
@@ -154,10 +156,13 @@ var waitClose = function(){
 var waitOpen = function(){
 	var intv = setInterval(function(){
 		if(checkEnable()){
-			io.sockets.emit('reg-open');
+			// set status and broadcast
+			otlistReg = {};
 			allowReg = true;
+			io.sockets.emit('reg-open');
+
 			clearInterval(intv);
-			waitStop();
+			waitClose();
 		}
 	},900);
 };
