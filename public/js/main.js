@@ -158,8 +158,8 @@ $(function(){
 				// init name from localStorage
 				var myName = localStorage.getItem('user-name');
 				if(myName){
-				    $nameInput.val();
-				    View.updateCloudByMyName();
+				    $nameInput.val(myName);
+				    View.updateCloudByMyName(myName);
 				}
 
 				// check allowReg stat
