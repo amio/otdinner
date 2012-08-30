@@ -156,7 +156,11 @@ $(function(){
 			 */
 			init:function(initStat){
 				// init name from localStorage
-				$nameInput.val(localStorage.getItem('user-name'));
+				var myName = localStorage.getItem('user-name');
+				if(myName){
+				    $nameInput.val();
+				    View.updateCloudByMyName();
+				}
 
 				// check allowReg stat
 				if(!initStat['allowReg']){

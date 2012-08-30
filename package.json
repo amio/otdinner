@@ -1,13 +1,13 @@
 {
   "name": "otdinner",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "private": true,
   "engines": {
     "node": "0.8.x",
     "npm": "1.1.x"
   },
   "dependencies": {
-    "express": "3.0.0rc1",
+    "express": "3.0.x",
     "socket.io": "0.9.x"
   },
   "subdomain": "otd",
